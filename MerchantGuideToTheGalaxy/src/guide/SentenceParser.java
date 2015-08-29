@@ -78,5 +78,28 @@ public class SentenceParser {
 		
 		return total;
 	}
+	
+	public boolean isIncludeUnit(List<String> splittedSentece){
+		for (Map.Entry<String, Integer> entry : units.entrySet()) {
+			for (String word : splittedSentece) {
+				if(word.equalsIgnoreCase(entry.getKey())){
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 
+	public boolean isIncludeGold(List<String> splittedSentece){
+		for (Map.Entry<String, Integer> entry : gold.entrySet()) {
+			for (String word : splittedSentece) {
+				if(word.equalsIgnoreCase(entry.getKey())){
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 }
