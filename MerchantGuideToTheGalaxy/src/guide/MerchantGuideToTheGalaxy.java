@@ -14,5 +14,11 @@ public class MerchantGuideToTheGalaxy {
 		sentence2.goldParser();
 		System.out.println("sonuç : " +sentence.getGold().get("Silver"));
 		
+		SentenceParser sentence3 = new SentenceParser("How much is glob glob ?");
+		System.out.println("sonuç : " +sentence3.calculateUnits());
+		
+		SentenceParser sentence4 = new SentenceParser("How many glob Silver ?");
+		System.out.println("sonuç : " +sentence4.calculateGold());
+		
 	}
 }

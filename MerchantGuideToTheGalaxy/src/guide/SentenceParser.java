@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+/*
+ * how much is pish tegj glob glob ?
+   how many Credits is glob prok Silver ?
 
+*/
 public class SentenceParser {
 	private String sentence;
 	private ConvertRomanToDecimal converter;
@@ -39,8 +43,16 @@ public class SentenceParser {
 
 	public void goldParser() {
 		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
+		
+		int total = calculateUnits();
+		int result = Integer.parseInt(splittedSentence.get(4)) / total;
+		gold.put(splittedSentence.get(2), result);
+	}
+	
+	public int calculateUnits(){
+		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
+		
 		int total = 0;
-
 		for (Map.Entry<String, Integer> entry : units.entrySet()) {
 			for (String word : splittedSentence) {
 				if(word.equalsIgnoreCase(entry.getKey())){
@@ -48,10 +60,27 @@ public class SentenceParser {
 				}
 			}
 		}
-
-		int result = Integer.parseInt(splittedSentence.get(4)) / total;
-		gold.put(splittedSentence.get(2), result);
+		
+		return total;
+		
 	}
 	
+	public int calculateGold(){
+		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
+		
+		int total = 0;
+		int unitsTotal = 0;
+		unitsTotal = calculateUnits();
+		
+		for (Map.Entry<String, Integer> entry : gold.entrySet()) {
+			for (String word : splittedSentence) {
+				if(word.equalsIgnoreCase(entry.getKey())){
+					total =  entry.getValue() * unitsTotal;
+				}
+			}
+		}
+		
+		return total;
+	}
 
 }
