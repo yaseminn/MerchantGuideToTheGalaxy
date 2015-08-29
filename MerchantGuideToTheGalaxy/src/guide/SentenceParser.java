@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-/*
- * how much is pish tegj glob glob ?
-   how many Credits is glob prok Silver ?
 
-*/
 public class SentenceParser {
 	private String sentence;
 	private ConvertRomanToDecimal converter;

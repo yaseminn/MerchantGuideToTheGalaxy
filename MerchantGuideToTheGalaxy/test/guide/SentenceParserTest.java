@@ -23,5 +23,21 @@ public class SentenceParserTest {
 		Assert.assertEquals(sentence.getGold().get("Silver"),result);
 	}
 	
+	@Test
+	public void calculateUnitsTest() {
+		SentenceParser sentence = new SentenceParser("How much is glob glob ?");
+		int result = 2;
+		Assert.assertEquals(sentence.calculateUnits(),result);
+	}
+	
+	
+	@Test
+	public void calculateGoldTest() {
+		SentenceParser sentence = new SentenceParser("How many glob Silver ?");
+		int result = 17;
+		Assert.assertEquals(sentence.calculateGold(),result);
+	}
+	
+	
 
 }
