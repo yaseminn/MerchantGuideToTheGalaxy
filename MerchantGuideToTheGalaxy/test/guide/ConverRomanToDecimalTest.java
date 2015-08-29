@@ -31,8 +31,8 @@ public class ConverRomanToDecimalTest {
 	
 	@Test
 	public void parseRomanToDecimaltest() {
-		ConvertRomanToDecimal convertRoman = new ConvertRomanToDecimal("XCCC");
-		Assert.assertEquals(convertRoman.parseRomanToDecimal(),290);
+		ConvertRomanToDecimal convertRoman = new ConvertRomanToDecimal("X");
+		Assert.assertEquals(convertRoman.parseRomanToDecimal(),10);
 
 	}
 	
