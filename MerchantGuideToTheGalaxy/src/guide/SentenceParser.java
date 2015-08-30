@@ -8,8 +8,9 @@ import java.util.Map;
 public class SentenceParser {
 	private String sentence;
 	private ConvertRomanToDecimal converter;
-	private static Map<String, Integer> units = new HashMap<>();
-	private static Map<String, Integer> gold = new HashMap<>();
+	private static Map<String, String> units = new HashMap<>();
+	private static Map<String, Double> gold = new HashMap<>();
+	private String total;
 
 	public SentenceParser(String sentence) {
 		this.sentence = sentence;
@@ -23,52 +24,56 @@ public class SentenceParser {
 		return sentence;
 	}
 
-	public Map<String, Integer> getUnits() {
+	public Map<String, String> getUnits() {
 		return units;
 	}
 
-	public Map<String, Integer> getGold() {
+	public Map<String, Double> getGold() {
 		return gold;
 	}
 
 	public void unitParser() {
 		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
-		converter = new ConvertRomanToDecimal(splittedSentence.get(2));
-		units.put(splittedSentence.get(0), converter.parseRomanToDecimal());
+		units.put(splittedSentence.get(0), splittedSentence.get(2));
 	}
 
 	public void goldParser() {
 		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
 		
-		int total = calculateUnits();
-		int result = Integer.parseInt(splittedSentence.get(4)) / total;
+		double total = calculateUnits();
+		double result = Integer.parseInt(splittedSentence.get(4)) / total;
 		gold.put(splittedSentence.get(2), result);
 	}
 	
-	public int calculateUnits(){
+	public double calculateUnits(){
 		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
 		
-		int total = 0;
-		for (Map.Entry<String, Integer> entry : units.entrySet()) {
+		String total = "";
+		
+		for (Map.Entry<String, String> entry : units.entrySet()) {
 			for (String word : splittedSentence) {
 				if(word.equalsIgnoreCase(entry.getKey())){
-					total += entry.getValue();
+					total= total.concat(entry.getValue()) ;
 				}
 			}
 		}
 		
-		return total;
-		
+		if(!sentence.contains("Credits")){
+			converter = new ConvertRomanToDecimal(total);
+			return converter.parseRomanToDecimal();
+		}
+		converter = new ConvertRomanToDecimal(new StringBuilder(total).reverse().toString());
+		return converter.parseRomanToDecimal();
 	}
 	
-	public int calculateGold(){
+	public double calculateGold(){
 		List<String> splittedSentence = Arrays.asList(sentence.split(" "));
 		
-		int total = 0;
-		int unitsTotal = 0;
+		double total = 0;
+		double unitsTotal = 0;
 		unitsTotal = calculateUnits();
 		
-		for (Map.Entry<String, Integer> entry : gold.entrySet()) {
+		for (Map.Entry<String, Double> entry : gold.entrySet()) {
 			for (String word : splittedSentence) {
 				if(word.equalsIgnoreCase(entry.getKey())){
 					total =  entry.getValue() * unitsTotal;
@@ -80,7 +85,7 @@ public class SentenceParser {
 	}
 	
 	public boolean isIncludeUnit(List<String> splittedSentece){
-		for (Map.Entry<String, Integer> entry : units.entrySet()) {
+		for (Map.Entry<String, String> entry : units.entrySet()) {
 			for (String word : splittedSentece) {
 				if(word.equalsIgnoreCase(entry.getKey())){
 					return true;
@@ -92,7 +97,7 @@ public class SentenceParser {
 	}
 
 	public boolean isIncludeGold(List<String> splittedSentece){
-		for (Map.Entry<String, Integer> entry : gold.entrySet()) {
+		for (Map.Entry<String, Double> entry : gold.entrySet()) {
 			for (String word : splittedSentece) {
 				if(word.equalsIgnoreCase(entry.getKey())){
 					return true;

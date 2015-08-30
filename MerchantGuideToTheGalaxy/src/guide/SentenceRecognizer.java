@@ -28,6 +28,11 @@ public class SentenceRecognizer {
 		this.outputSentecence = outputSentence;
 	}
 
+	@Override
+	public String toString() {
+		return getOutputSentecence() + "\n";
+	}
+	
 	public void recognizeSentence() {
 
 		List<String> splittedSentece = Arrays
@@ -37,8 +42,7 @@ public class SentenceRecognizer {
 		if ((splittedSentece.size() == 3)
 				&& (splittedSentece.get(1).equalsIgnoreCase("is"))) {
 			parser.unitParser();
-			
-		} 
+		}  
 		// glob glob Silver is 34 Credits
 		if(splittedSentece.contains("Credits") && parser.isIncludeUnit(splittedSentece)){
 			if (splittedSentece.get(5).equalsIgnoreCase("Credits")) {
@@ -52,8 +56,7 @@ public class SentenceRecognizer {
 					inputSentecence.length() - 2).trim()
 					+ " is ";
 			setOutputSentecence(outputResultMuch
-					+ Integer.toString(parser.calculateUnits()));
-			
+					+ Double.toString(parser.calculateUnits()));
 		} 
 		// how many Credits is glob prok Iron ? glob prok Iron is 782
 		// Credits
@@ -70,6 +73,10 @@ public class SentenceRecognizer {
 		} 
 
 		// unknown sentence
+	}
+	
+	public boolean isQuestion(){
+		return inputSentecence.contains("?");
 	}
 
 }

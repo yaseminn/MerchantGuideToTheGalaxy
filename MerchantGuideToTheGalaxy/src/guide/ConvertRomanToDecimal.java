@@ -60,12 +60,9 @@ public class ConvertRomanToDecimal {
 
 			if (value <= previousValue) {
 				if (previousValue == value) {
-					//System.out.println("same");
 					if (repeated(digit)) {
 						sameDigitCounter++;
-						System.out.println(sameDigitCounter);
 						if ((sameDigitCounter == 3) && (romans.length() > (index + 2))) {
-							System.out.println("index : " + (index + 2));
 							if (romans.charAt(index + 2) == digit) {
 								if (!isSmaller(romans.charAt(index + 1), digit)) {
 									System.out

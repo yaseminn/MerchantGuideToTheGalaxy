@@ -25,5 +25,13 @@ public class SentenceRecognizerTest {
 		recognizer4.recognizeSentence();
 		Assert.assertEquals(recognizer4.getOutputSentecence(),"glob Silver is 17 Credits");
 	}
+	
+	@Test
+	public void isQuestionTest() {
+		SentenceRecognizer recognizer = new SentenceRecognizer("how much is glob ?");
+		Assert.assertTrue(recognizer.isQuestion());
+	}
+	
+	
 
 }

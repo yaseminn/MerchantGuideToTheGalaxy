@@ -1,46 +1,40 @@
 package guide;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 import org.junit.Assert;
 
 public class MerchantGuideToTheGalaxy {
-	public static void main(String[] args) {
-		ConvertRomanToDecimal convertRoman = new ConvertRomanToDecimal("XCCC");
-		System.out.println(convertRoman.parseRomanToDecimal());
+	public static void main(String[] args) throws IOException {
 		
-		SentenceParser sentence = new SentenceParser("glob is I");
-		sentence.unitParser();
+		SentenceRecognizer recognizer ;
+		String inputFile = null;
+		String outputFile = null;
 		
-		System.out.println("sonuç : " +sentence.getUnits().get("glob"));
+		if (args.length > 0) {
+		    try {
+		    	inputFile = args[0];
 
-		SentenceParser sentence2 = new SentenceParser("glob glob Silver is 34 Credits");
-		sentence2.goldParser();
-		System.out.println("sonuç : " +sentence.getGold().get("Silver"));
-		
-		SentenceParser sentence3 = new SentenceParser("How much is glob glob ?");
-		System.out.println("sonuç : " +sentence3.calculateUnits());
-		
-		SentenceParser sentence4 = new SentenceParser("How many glob Silver ?");
-		System.out.println("sonuç : " +sentence4.calculateGold());
-		
-		String str1 = "how much is glob ?";
-		String str2 = "how many Credits is glob Silver ?";
-		
-		System.out.println(str1.substring(str1.indexOf("is") + 2, str1.length()-2).trim());
-		System.out.println(str2.substring(str2.indexOf("is") + 2, str2.length()-2).trim());
-		
-		SentenceRecognizer recognizer1 = new SentenceRecognizer("glob is I");
-		SentenceRecognizer recognizer2 = new SentenceRecognizer("glob glob Silver is 34 Credits");
-		SentenceRecognizer recognizer3 = new SentenceRecognizer("how much is glob ?");
-		SentenceRecognizer recognizer4 = new SentenceRecognizer("how many Credits is glob Silver ?");
-		
-		recognizer1.recognizeSentence();
-		recognizer2.recognizeSentence();
-		
-		recognizer3.recognizeSentence();
-		System.out.println(recognizer3.getOutputSentecence());
-		
-		recognizer4.recognizeSentence();
-		System.out.println(recognizer4.getOutputSentecence());
-
+		    	String sentence = new String(Files.readAllBytes(Paths.get(inputFile)));
+		    	String lines[] = sentence.split("\\r?\\n");
+		    	outputFile = args[1];
+		    	
+		    	for(String line:lines){
+		    		recognizer = new SentenceRecognizer(line);
+		    		recognizer.recognizeSentence();
+		    		
+		    		if(recognizer.isQuestion()){
+		    			Files.write(Paths.get(outputFile), recognizer.toString().getBytes(),StandardOpenOption.APPEND);
+		    		}
+		    	}
+		    } catch (NumberFormatException e) {
+		        System.err.println("Files should be given by arguments");
+		        System.exit(1);
+		    }
+		}
+       
 	}
 }
