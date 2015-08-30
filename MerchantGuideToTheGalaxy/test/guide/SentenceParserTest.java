@@ -2,6 +2,9 @@ package guide;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -38,6 +41,23 @@ public class SentenceParserTest {
 		Assert.assertEquals(sentence.calculateGold(),result);
 	}
 	
-	
+	@Test
+	public void isIncludeUnitTest() {
+		SentenceParser sentence = new SentenceParser("glob is I");
+		sentence.unitParser();
+		String input = "How many glob Silver ?";
+		List<String> inputSplitted = Arrays.asList(input.split(" "));
+		
+		Assert.assertTrue(sentence.isIncludeUnit(inputSplitted));
+	}
 
+	@Test
+	public void isIncludeGoldTest() {
+		SentenceParser sentence = new SentenceParser("glob glob Silver is 34 Credits");
+		sentence.goldParser();
+		String input = "How many glob Silver ?";
+		List<String> inputSplitted = Arrays.asList(input.split(" "));
+		
+		Assert.assertTrue(sentence.isIncludeGold(inputSplitted));
+	}
 }
