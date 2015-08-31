@@ -1,3 +1,6 @@
+/*
+ * @author yasemin
+ */
 package guide;
 
 import static org.junit.Assert.*;
@@ -32,8 +35,8 @@ public class ConverRomanToDecimalTest {
 	@Test
 	public void parseRomanToDecimaltest() {
 		ConvertRomanToDecimal convertRoman = new ConvertRomanToDecimal("X");
-		Assert.assertEquals(convertRoman.parseRomanToDecimal(),10);
-
+		Double result = 10.0;
+		Assert.assertEquals(convertRoman.parseRomanToDecimal(),result);
 	}
 	
 	@Test

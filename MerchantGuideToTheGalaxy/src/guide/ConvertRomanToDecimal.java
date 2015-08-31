@@ -1,3 +1,6 @@
+/*
+ * @author yasemin
+ */
 package guide;
 
 import java.util.ArrayList;
@@ -6,22 +9,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class ConvertRomanToDecimal {
+	private static Logger logger = Logger.getLogger(ConvertRomanToDecimal.class
+			.getCanonicalName());
 
 	private String romans;
-	
-	public ConvertRomanToDecimal(String romanNumber){
+
+	public ConvertRomanToDecimal(String romanNumber) {
 		romans = romanNumber;
 	}
-	public void setNumber(String romanNumber){
+
+	public void setNumber(String romanNumber) {
 		this.romans = romanNumber;
 	}
-	
-	public String getNumber (){
+
+	public String getNumber() {
 		return romans;
 	}
-	
+
 	public static List<Character> unRepeated = Arrays.asList('D', 'L', 'V');
 	public static List<Character> repeated = Arrays.asList('I', 'X', 'C', 'M');
 
@@ -43,10 +50,10 @@ public class ConvertRomanToDecimal {
 	}
 
 	/*
-	 * illegal digit var mı kontrol et.
+	 * Parse the given roman numbers into decimal.
 	 */
-	public int parseRomanToDecimal() {
-		int total = 0;
+	public Double parseRomanToDecimal() {
+		Double total = 0.0;
 		int previousValue = Integer.MAX_VALUE;
 		int index = 0;
 		char previousDigit = '\0';
@@ -62,12 +69,12 @@ public class ConvertRomanToDecimal {
 				if (previousValue == value) {
 					if (repeated(digit)) {
 						sameDigitCounter++;
-						if ((sameDigitCounter == 3) && (romans.length() > (index + 2))) {
+						if ((sameDigitCounter == 3)
+								&& (romans.length() > (index + 2))) {
 							if (romans.charAt(index + 2) == digit) {
 								if (!isSmaller(romans.charAt(index + 1), digit)) {
-									System.out
-											.println("hatalı numara sameDigitCounter : "
-													+ (index + 2));
+									logger.warning(digit
+											+ " can't be same as previous.");
 									break;
 								}
 							} else {
@@ -75,7 +82,7 @@ public class ConvertRomanToDecimal {
 							}
 						}
 					} else {
-						System.out.println("Hatalı adet" + digit);
+						logger.warning(digit + " can't repeat.");
 						break;
 					}
 				}
@@ -96,6 +103,10 @@ public class ConvertRomanToDecimal {
 		return total;
 	}
 
+	
+	/*
+	 * Is given first number is smaller than the second one. 
+	 */
 	public static boolean subtractable(Character firstNum, Character secondNum) {
 
 		if ((firstNum.equals('I'))

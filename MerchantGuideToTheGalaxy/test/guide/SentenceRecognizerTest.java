@@ -1,3 +1,6 @@
+/*
+ * @author yasemin
+ */
 package guide;
 
 import static org.junit.Assert.*;
@@ -20,10 +23,10 @@ public class SentenceRecognizerTest {
 		recognizer2.recognizeSentence();
 		
 		recognizer3.recognizeSentence();
-		Assert.assertEquals(recognizer3.getOutputSentecence(),"glob is 1");
+		Assert.assertEquals(recognizer3.getOutputSentecence(),"glob is 1.0");
 		
 		recognizer4.recognizeSentence();
-		Assert.assertEquals(recognizer4.getOutputSentecence(),"glob Silver is 17 Credits");
+		Assert.assertEquals(recognizer4.getOutputSentecence(),"glob Silver is 17.0 Credits");
 	}
 	
 	@Test

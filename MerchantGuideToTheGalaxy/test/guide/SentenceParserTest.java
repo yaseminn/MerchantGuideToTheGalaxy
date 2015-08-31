@@ -1,3 +1,6 @@
+/*
+ * @author yasemin
+ */
 package guide;
 
 import static org.junit.Assert.*;
@@ -13,32 +16,32 @@ public class SentenceParserTest {
 	@Test
 	public void unitParserTest() {
 		SentenceParser sentence = new SentenceParser("glob is I");
-		sentence.unitParser() ;
-		Integer result = 1;
+		sentence.unitParser();
+		String result = "I";
 		Assert.assertEquals(sentence.getUnits().get("glob"),result);
 	}
 	
 	@Test
-	public void goldParserTest() {
+	public void merchandiseParserTest() {
 		SentenceParser sentence = new SentenceParser("glob glob Silver is 34 Credits.");
-		sentence.goldParser() ;
-		Integer result = 17;
-		Assert.assertEquals(sentence.getGold().get("Silver"),result);
+		sentence.merchandiseParser() ;
+		Double result = 17.0;
+		Assert.assertEquals(sentence.getMerchandise().get("Silver"),result);
 	}
 	
 	@Test
 	public void calculateUnitsTest() {
 		SentenceParser sentence = new SentenceParser("How much is glob glob ?");
-		int result = 2;
+		Double result = 2.0;
 		Assert.assertEquals(sentence.calculateUnits(),result);
 	}
 	
 	
 	@Test
-	public void calculateGoldTest() {
+	public void calculateMerchandiseTest() {
 		SentenceParser sentence = new SentenceParser("How many glob Silver ?");
-		int result = 17;
-		Assert.assertEquals(sentence.calculateGold(),result);
+		Double result = 17.0;
+		Assert.assertEquals(sentence.calculateMerchandise(),result);
 	}
 	
 	@Test
@@ -52,12 +55,26 @@ public class SentenceParserTest {
 	}
 
 	@Test
-	public void isIncludeGoldTest() {
+	public void isIncludeMerchandiseTest() {
 		SentenceParser sentence = new SentenceParser("glob glob Silver is 34 Credits");
-		sentence.goldParser();
+		sentence.merchandiseParser();
 		String input = "How many glob Silver ?";
 		List<String> inputSplitted = Arrays.asList(input.split(" "));
 		
-		Assert.assertTrue(sentence.isIncludeGold(inputSplitted));
+		Assert.assertTrue(sentence.isIncludeMerchandise(inputSplitted));
 	}
+	
+	@Test
+	public void splitSentenceTest() {
+		SentenceParser sentence = new SentenceParser("");
+		Assert.assertTrue(!sentence.splitSentence());
+	}
+	
+	@Test
+	public void isValidRomanNumberTest() {
+		SentenceParser sentence = new SentenceParser("");
+		Assert.assertTrue(sentence.isValidRomanNumber("I"));
+		Assert.assertTrue(!sentence.isValidRomanNumber("Q"));
+	}
+
 }
