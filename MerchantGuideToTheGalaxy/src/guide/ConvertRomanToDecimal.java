@@ -3,7 +3,6 @@
  */
 package guide;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,7 +49,7 @@ public class ConvertRomanToDecimal {
 	}
 
 	/*
-	 * Parse the given roman numbers into decimal.
+	 * Convert the given roman number to decimal.
 	 */
 	public Double parseRomanToDecimal() {
 		Double total = 0.0;
@@ -60,17 +59,20 @@ public class ConvertRomanToDecimal {
 		int sameDigitCounter = 1;
 
 		while (index < romans.length()) {
-			// legal olup olmadığını kontrol et
+			
 			char digit = romans.charAt(index);
 
 			int value = romanNumbers.get(digit);
 
 			if (value <= previousValue) {
+				// Find the numbers not repeatable
 				if (previousValue == value) {
 					if (repeated(digit)) {
 						sameDigitCounter++;
+						// If the number repeatable, detects how many times it repeat
 						if ((sameDigitCounter == 3)
 								&& (romans.length() > (index + 2))) {
+							//If repeats more than 3, check the fourth and fifth number according to rule
 							if (romans.charAt(index + 2) == digit) {
 								if (!isSmaller(romans.charAt(index + 1), digit)) {
 									logger.warning(digit
@@ -105,7 +107,7 @@ public class ConvertRomanToDecimal {
 
 	
 	/*
-	 * Is given first number is smaller than the second one. 
+	 * Check the given first number is smaller than the second one according to rule.
 	 */
 	public static boolean subtractable(Character firstNum, Character secondNum) {
 
@@ -124,6 +126,9 @@ public class ConvertRomanToDecimal {
 
 	}
 
+	/*
+	 * Check the given digit repeats according to rule.
+	 */
 	public static boolean repeated(char digit) {
 		boolean result = false;
 		for (Character c : repeated) {

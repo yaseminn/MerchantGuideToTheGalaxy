@@ -1,6 +1,7 @@
 /*
  * @author yasemin
  */
+
 package guide;
 
 import static org.junit.Assert.*;
@@ -14,11 +15,11 @@ import org.junit.Test;
 public class SentenceParserTest {
 
 	@Test
-	public void unitParserTest() {
+	public void alienUnitParserTest() {
 		SentenceParser sentence = new SentenceParser("glob is I");
 		sentence.unitParser();
 		String result = "I";
-		Assert.assertEquals(sentence.getUnits().get("glob"),result);
+		Assert.assertEquals(sentence.getAlienUnits().get("glob"),result);
 	}
 	
 	@Test
@@ -30,10 +31,10 @@ public class SentenceParserTest {
 	}
 	
 	@Test
-	public void calculateUnitsTest() {
+	public void calculateAlienUnitsTest() {
 		SentenceParser sentence = new SentenceParser("How much is glob glob ?");
 		Double result = 2.0;
-		Assert.assertEquals(sentence.calculateUnits(),result);
+		Assert.assertEquals(sentence.calculateAlienUnits(),result);
 	}
 	
 	

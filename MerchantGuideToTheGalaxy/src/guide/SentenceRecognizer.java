@@ -71,7 +71,7 @@ public class SentenceRecognizer {
 					inputSentecence.length() - 2).trim()
 					+ " is ";
 			setOutputSentecence(outputResultMuch
-					+ Double.toString(parser.calculateUnits()));
+					+ Double.toString(parser.calculateAlienUnits()));
 			logger.info(inputSentecence + " is translated");
 			unRuleSentence3 = false;
 		} 

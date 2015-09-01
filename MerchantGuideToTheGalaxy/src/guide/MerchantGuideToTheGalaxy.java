@@ -1,6 +1,17 @@
 /*
  * @author yasemin
+ * 
+ * The program includes the calculations between Roman Numbers to Alien units.
+ * Input and outfile which are in source file should be given as an argument. 
+ * The logs helps you to understand the program is working correctly or not.
+ * Before the begining create input and output file both, and every time run the
+ * program clear the output's content.
+ * 
+ * To run from terminal:
+ * java -jar <jar-file-name>.jar input.txt output.txt 
+ *
  */
+
 package guide;
 
 import java.io.IOException;
